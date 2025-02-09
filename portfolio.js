@@ -33,6 +33,107 @@ const scheduleCallBtn = document.getElementById("schedule_a_call");
 const emailIcon = document.getElementById("email");
 
 
+const canvas = document.getElementById("particles_canvas");
+
+const context = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particlesArray = [];
+const maxParticles = 60;
+const mouse = {x:null, y:null};
+
+// Resize Canvas on Window Resize
+window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+// Capture Mouse Movement
+window.addEventListener("mousemove", (e) => {
+    mouse.x = e.x;
+    mouse.y = e.y;
+});
+
+// Particle Class
+class Particle {
+    constructor(){
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 1.1+0.5;
+        this.speedX = Math.random() * 0.3-0.1;
+        this.speedY = Math.random() * 0.3-0.1;
+    }
+
+    update(){
+        // Cursor Attraction
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
+        const distance = Math.sqrt(dx*dx + dy*dy);
+
+        if (distance < 80) {
+            this.x = this.x - dx*0.0080;
+            this.y = this.y - dy*0.0080;
+        }
+
+        // Move particles
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        // Reset Position if Out of Bounds
+        if (this.x < 0 || this.x > canvas.width) this.x = Math.random() * canvas.width;
+        if (this.y < 0 || this.y > canvas.height) this.y = Math.random() * canvas.height;
+    }
+
+    draw(){
+        if (isdarkModeActive) {
+            context.beginPath();
+            context.arc(this.x, this.y, this.size, 0, Math.PI*2);
+            context.fillStyle = "rgba(255, 255, 255, 0.2)";
+            context.fill();
+    
+            context.strokeStyle = "rgba(255, 255, 255, 0.6)";
+            context.lineWidth = 0.5;
+            context.stroke();
+        }
+        else{
+            context.beginPath();
+            context.arc(this.x, this.y, this.size, 0, Math.PI*2);
+            context.fillStyle = "rgba(0, 0, 0, 0.2)";
+            context.fill();
+    
+            context.strokeStyle = "rgba(0, 0, 0, 0.6)";
+            context.lineWidth = 0.5;
+            context.stroke();
+        }
+    }
+};
+
+// Create Particles according
+function initParticles(){
+    for(let i=0; i < maxParticles; i++){
+        particlesArray.push(new Particle());
+    }
+}
+
+// Animate Particles
+function animateParticles(){
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    particlesArray.forEach((particle) => {
+        particle.update();
+        particle.draw();
+    });
+
+    requestAnimationFrame(animateParticles);
+};
+
+// Run Animation
+initParticles();
+animateParticles();
+
+
+
 section7.addEventListener("click", socialLinksAnimationHandler);
 leftArrow.addEventListener("click", projectsRightScrollingHandler);
 rightArrow.addEventListener("click", projectsLeftScrollingHandler);
