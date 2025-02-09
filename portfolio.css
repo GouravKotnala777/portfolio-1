@@ -14,8 +14,11 @@ body{
     padding: 0 20px;
     background-color: black;
     color: white;
-    transition: 0.5s;
-    transition-timing-function: ease-in-out;
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -ms-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
 }
 
 .heading{
@@ -41,24 +44,19 @@ body{
 .border_theme{
     border: 1px solid #333333;
 }
-.single_word-light{
-    font-size: 2rem;
-    font-weight: 600;
-    background: linear-gradient(45deg, #000000, #ffffff, #000000);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+.single_word-light,
 .single_word-dark{
     font-size: 2rem;
     font-weight: 600;
-    background: linear-gradient(45deg, #ffffff, #000000, #ffffff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-/*.theme_inverse{
-    back
-}*/
-
+.single_word-light{
+    background: linear-gradient(45deg, #000000, #ffffff, #000000);
+}
+.single_word-dark{
+    background: linear-gradient(45deg, #ffffff, #000000, #ffffff);
+}
 
 .portfolio_container{
     max-width: 700px;
@@ -331,8 +329,11 @@ body{
                 position: absolute;
                 top: 0px;
                 padding: 5px;
-                transition: 0.5s;
-                transition-timing-function: ease-in-out;
+                -webkit-transition: 0.5s ease-in-out;
+                -moz-transition: 0.5s ease-in-out;
+                -ms-transition: 0.5s ease-in-out;
+                -o-transition: 0.5s ease-in-out;
+                transition: 0.5s ease-in-out;
                 opacity: 0;
                 text-decoration: none;
                 color: currentColor;
@@ -351,12 +352,21 @@ body{
     }
 }
 
-@media screen and (width <= 760px) {
+@media screen and (max-width: 760px) {
+    * { font-size: 16px; }
+}
+
+/*@media screen and (width <= 760px) {
     *{
         font-size: 16px;
     }
-}
+}*/
 
+@-webkit-keyframes twinkle {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.9); }
+    100% { transform: scale(1); }
+}
 @keyframes twinkle {
     0%{
         transform: scale(1);
@@ -367,6 +377,11 @@ body{
     100%{
         transform: scale(1);
     }
+}
+
+@-webkit-keyframes glare {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
 }
 @keyframes glare {
     0%{
