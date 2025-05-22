@@ -69,7 +69,7 @@ class Particle {
         // Cursor Attraction
         const dx = this.x - mouse.x;
         const dy = this.y - mouse.y;
-        const distance = Math.sqrt(dx*dx + dy*dy);
+        const distance = Math.sqrt(dx*dx + dy*dy); //Euclidean Distance formula
 
         if (distance < 80) {
             this.x = this.x - dx*0.0080;
