@@ -1,5 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,79.7,100..900;1,79.7,100..900&display=swap');
 
+:root {
+  --chart-filter-light: none; /* Original GitHub blue */
+  --chart-filter-dark: invert(1) hue-rotate(180deg) contrast(1.2);
+}
+
+body.light_mode #github-chart {
+  filter: var(--chart-filter-light);
+}
+
+#github-chart {
+    filter: var(--chart-filter-dark);
+}
+.github-chart_cont{
+    border-radius: 8px;
+    padding: 20px;
+}
+.github-chart_scale{
+    font-size: 0.8rem;
+    text-align: right;
+    margin-top: 10px;
+    span{
+        font-size: 10px;
+    }
+}
 
 *{
     font-family: "Roboto", serif;

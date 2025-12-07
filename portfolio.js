@@ -190,6 +190,9 @@ function themeHandler() {
         for(let i=0; i<borderTheme.length; i++){
             borderTheme[i].style.border = "1px solid #333333"
         }
+        for(let i=0; i<projectName.length; i++){
+            projectName[i].style.color = "white";
+        }
         rightArrowSvg.style.stroke = "white";
 
         sunIcon.style.opacity = 0;
